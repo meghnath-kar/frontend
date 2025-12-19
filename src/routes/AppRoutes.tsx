@@ -6,7 +6,7 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 
 const AppRoutes: React.FC = () => (
-  <Routes>
+  <Routes> 
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
