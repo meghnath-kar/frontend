@@ -1,0 +1,47 @@
+html, body, #root, .app-container {
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+
+  .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    max-width: 100%;
+    word-break: break-word;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  main.container {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .col-md-8 {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  footer {
+    margin-top: 0;
+    flex-shrink: 0;
+  }
+}
