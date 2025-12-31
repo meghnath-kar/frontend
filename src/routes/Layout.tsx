@@ -6,7 +6,7 @@ const Layout: React.FC = () => (
   <div className="app-container">
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
-        <Link className="navbar-brand" to="/">MyApp</Link>
+        <Link className="navbar-brand fw-bold" to="/">📚 LMS</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -16,10 +16,13 @@ const Layout: React.FC = () => (
               <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <Link className="nav-link" to="/courses">All Courses</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <Link className="nav-link" to="/search">Search Courses</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/add-course">Add Course</Link>
             </li>
           </ul>
         </div>
@@ -31,7 +34,7 @@ const Layout: React.FC = () => (
     </main>
 
     <footer className="bg-dark text-white text-center py-4 mt-5">
-      <p>&copy; 2025 React TypeScript App</p>
+      <p>&copy; 2025 Learning Management System (LMS) - All Rights Reserved</p>
     </footer>
   </div>
 );
