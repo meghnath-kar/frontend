@@ -11,12 +11,29 @@ const AddCourse: React.FC = () => {
     technology: '',
     instructor: '',
     duration: '',
-    level: 'Beginner' as const
+    level: 'Beginner' as const,
+    category: '' // Added category field
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const technologies = ['React', 'TypeScript', 'JavaScript', 'Python', 'Java', 'C#', 'Node.js', 'Angular', 'Vue.js', 'HTML/CSS'];
+  const categories = [
+    'Development',
+    'Music',
+    'IT & Software',
+    'Lifestyle',
+    'Marketing',
+    'Business',
+    'Design',
+    'Photography',
+    'Personal Development',
+    'Health & Fitness',
+    'Teaching & Academics',
+    'Finance & Accounting',
+    'Office Productivity',
+    'Other'
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -50,6 +67,9 @@ const AddCourse: React.FC = () => {
     }
     if (!formData.duration.trim()) {
       newErrors.duration = 'Duration is required';
+    }
+    if (!formData.category.trim()) {
+      newErrors.category = 'Category is required';
     }
 
     setErrors(newErrors);
@@ -127,6 +147,25 @@ const AddCourse: React.FC = () => {
               </div>
 
               <div className="col-md-6 mb-3">
+                <label htmlFor="category" className="form-label">
+                  Category <span className="text-danger">*</span>
+                </label>
+                <select
+                  className={`form-select ${errors.category ? 'is-invalid' : ''}`}
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a category</option>
+                  {categories.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+                {errors.category && <div className="invalid-feedback d-block">{errors.category}</div>}
+              </div>
+
+              <div className="col-md-6 mb-3">
                 <label htmlFor="level" className="form-label">
                   Level <span className="text-danger">*</span>
                 </label>
@@ -172,7 +211,7 @@ const AddCourse: React.FC = () => {
                   name="duration"
                   value={formData.duration}
                   onChange={handleChange}
-                  placeholder="e.g., 4 weeks"
+                  placeholder="e.g., 40 hours"
                 />
                 {errors.duration && <div className="invalid-feedback d-block">{errors.duration}</div>}
               </div>

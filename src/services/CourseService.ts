@@ -8,7 +8,7 @@ let courses: Course[] = [
     description: 'Learn the basics of React and component-based architecture',
     technology: 'React',
     instructor: 'John Doe',
-    duration: '4 weeks',
+    duration: '40 hours',
     level: 'Beginner',
     createdAt: '2025-01-10'
   },
@@ -18,7 +18,7 @@ let courses: Course[] = [
     description: 'Master advanced TypeScript concepts and patterns',
     technology: 'TypeScript',
     instructor: 'Jane Smith',
-    duration: '6 weeks',
+    duration: '60 hours',
     level: 'Advanced',
     createdAt: '2025-01-15'
   },
@@ -28,7 +28,7 @@ let courses: Course[] = [
     description: 'Learn HTML, CSS, and JavaScript basics',
     technology: 'JavaScript',
     instructor: 'Mike Johnson',
-    duration: '8 weeks',
+    duration: '80 hours',
     level: 'Beginner',
     createdAt: '2025-01-20'
   },
@@ -38,7 +38,7 @@ let courses: Course[] = [
     description: 'Use Python for data analysis and visualization',
     technology: 'Python',
     instructor: 'Sarah Williams',
-    duration: '10 weeks',
+    duration: '100 hours',
     level: 'Intermediate',
     createdAt: '2025-02-01'
   }

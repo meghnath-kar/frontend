@@ -29,7 +29,7 @@ const Layout: React.FC = () => (
       </div>
     </nav>
 
-    <main className="container mt-5">
+    <main className="container">
       <Outlet />
     </main>
 
