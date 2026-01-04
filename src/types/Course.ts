@@ -2,9 +2,11 @@ export interface Course {
   id: string;
   title: string;
   description: string;
-  technology: string;
-  instructor: string;
-  duration: string;
+  technology: { _id: string; label: string }[];
+  category: { _id: string; name: string }[];
+  instructor: { _id: string; fullName: string; email: string };
+  duration: number;
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   createdAt: string;
+  isActive: boolean;
 }
