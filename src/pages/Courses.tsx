@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Course } from '../types/Course';
 import { CourseService } from '../services/CourseService';
 import { Link } from 'react-router-dom';
-import CoursesList from '../components/CoursesList';
+import CoursesList from '../components/CourseList/CoursesList';
 
 const Courses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);

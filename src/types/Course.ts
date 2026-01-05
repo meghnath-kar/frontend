@@ -10,3 +10,8 @@ export interface Course {
   createdAt: string;
   isActive: boolean;
 }
+
+export interface CoursesListProps {
+  courses: Course[];
+  emptyMessage?: React.ReactNode;
+}

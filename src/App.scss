@@ -1,11 +1,13 @@
 html, body, #root, .app-container {
   height: 100%;
+  background-color: #F5F7FA;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #F5F7FA;
 
   main {
     flex: 1;
@@ -19,7 +21,7 @@ html, body, #root, .app-container {
     word-break: break-word;
 
     &:hover {
-      transform: translateY(-5px);
+      transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     }
   }
@@ -44,7 +46,6 @@ html, body, #root, .app-container {
   }
 }
 
-// Hero Section
 .hero-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -70,7 +71,6 @@ html, body, #root, .app-container {
   }
 }
 
-// Course Card Styles
 .course-card {
   border: 1px solid #e0e0e0;
   transition: all 0.3s ease;
@@ -118,7 +118,6 @@ html, body, #root, .app-container {
   }
 }
 
-// Feature Card Styles
 .feature-card {
   text-align: center;
   transition: all 0.3s ease;
@@ -137,28 +136,6 @@ html, body, #root, .app-container {
   }
 }
 
-// Filter Card
-.filter-card {
-  background-color: #f8f9fa;
-
-  .form-label {
-    color: #333;
-    margin-bottom: 0.5rem;
-  }
-
-  .form-control,
-  .form-select {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-
-    &:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-    }
-  }
-}
-
-// Add Course Form
 .add-course-container {
   padding-bottom: 2rem;
 
@@ -200,17 +177,14 @@ html, body, #root, .app-container {
   }
 }
 
-// Search Courses Container
 .search-courses-container {
   padding-bottom: 2rem;
 }
 
-// Home Container
 .home-container {
   padding-bottom: 2rem;
 }
 
-// Courses Container
 .courses-container {
   padding-bottom: 2rem;
 
@@ -221,58 +195,17 @@ html, body, #root, .app-container {
   }
 }
 
-// Responsive Design
-@media (max-width: 768px) {
-  .hero-section {
-    h1 {
-      font-size: 1.8rem;
-    }
-
-    .lead {
-      font-size: 1rem;
-    }
-
-    .btn {
-      min-width: auto;
-      margin-bottom: 0.5rem;
-    }
-
-    .d-flex.gap-3 {
-      flex-direction: column;
-    }
-  }
-
-  .course-card {
-    .card-title {
-      font-size: 1rem;
-    }
-  }
-
-  .filter-card {
-    .row {
-      .col-md-6,
-      .col-md-4,
-      .col-md-2 {
-        margin-bottom: 1rem;
-      }
-    }
-  }
-}
-
-// Alert Styles
 .alert {
   border-radius: 5px;
   border: 1px solid #e0e0e0;
 }
 
-// Badge Styles
 .badge {
   font-size: 0.8rem;
   padding: 0.4rem 0.7rem;
   border-radius: 4px;
 }
 
-// Button Styles
 .btn {
   border-radius: 5px;
   transition: all 0.3s ease;
@@ -291,51 +224,4 @@ html, body, #root, .app-container {
       background: linear-gradient(135deg, #5568d3 0%, #653a91 100%);
     }
   }
-
-  &.btn-success {
-    background-color: #28a745;
-    border: none;
-
-    &:hover {
-      background-color: #218838;
-    }
-  }
-}
-
-// Navbar Styles
-.navbar {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  .navbar-brand {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-
-    &:hover {
-      color: #fff !important;
-      transform: scale(1.05);
-    }
-  }
-
-  .nav-link {
-    transition: all 0.3s ease;
-    margin: 0 0.5rem;
-
-    &:hover {
-      color: #ffc107 !important;
-      transform: translateY(-2px);
-    }
-  }
-}
-
-.sidebar-filters-open {
-  transform: translateX(0);
-}
-
-.sidebar-filters-closed {
-  transform: translateX(-100%);
-}
-
-.sidebar-filters {
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  will-change: transform;
 }
