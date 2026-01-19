@@ -225,3 +225,27 @@ html, body, #root, .app-container {
     }
   }
 }
+
+// Course Card Hover Effect
+.course-card {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+  }
+}
+
+// Course Detail Page Styles
+.detail-item {
+  margin-bottom: 1rem;
+  
+  strong {
+    font-weight: 600;
+  }
+}

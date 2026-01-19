@@ -7,8 +7,6 @@ interface SidebarFiltersProps {
   technologies: { _id: string, label: string }[];
   categories: { _id: string, name: string }[];
   onFiltersChange: (filters: any) => void;
-  durations: string[];
-  onDurationsChange: (selected: string[]) => void;
   queryParams: any;
 }
 

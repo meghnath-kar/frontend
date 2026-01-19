@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
+    publicPath: '/',
     clean: true,
   },
   module: {
@@ -20,10 +21,8 @@ module.exports = {
         use: ['style-loader', 'css-loader', {
           loader: 'sass-loader',
           options: {
+            api: 'modern',
             implementation: require.resolve('sass'),
-            sassOptions: {
-              api: 'modern-compiler',
-            },
           },
         }],
       },

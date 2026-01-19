@@ -45,6 +45,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onSearch }) => {
               id="searchInput"
               placeholder="Search by title or description..."
               onChange={(e) => setSearchQuery(e.target.value)}
+              data-testid="search-input"
             />
             {showTooltip && (
               <div className="position-absolute mt-2" style={{ zIndex: 10 }}>

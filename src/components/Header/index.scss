@@ -19,5 +19,29 @@
       color: #ffc107 !important;
       transform: translateY(-2px);
     }
+
+    &.btn {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: #ffc107;
+        color: #ffc107 !important;
+      }
+    }
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  .navbar-nav {
+    align-items: center;
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+    }
   }
 }
