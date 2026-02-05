@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { CourseService } from './CourseService';
 
-// Mock axios
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('CourseService', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // Clear console.error mock before each test
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 

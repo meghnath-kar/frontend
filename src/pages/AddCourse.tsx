@@ -47,7 +47,6 @@ const AddCourse: React.FC = () => {
         setCategories(_formatOptions(data.categories) || []);
       } catch (error) {
         console.error('Error fetching filters:', error);
-        // Fallback to empty arrays if API fails
         setTechnologies([]);
         setCategories([]);
       } finally {
@@ -115,7 +114,7 @@ const AddCourse: React.FC = () => {
         text: 'Course added successfully!',
         confirmButtonText: 'OK'
       }).then(() => {
-        // navigate('/search');
+        navigate('/search');
       })
     }).catch((error) => {
       console.error('Error adding course:', error);

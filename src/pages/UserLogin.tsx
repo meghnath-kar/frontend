@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import AuthService from '../services/AuthService';
+import useAuthRedirect from '../hooks/useAuthRedirect';
 import '../styles/UserLogin.scss';
 
 interface LoginFormData {
@@ -10,6 +11,8 @@ interface LoginFormData {
 
 const UserLogin: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  useAuthRedirect();
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
@@ -17,25 +20,12 @@ const UserLogin: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    // Redirect if already authenticated
-    if (AuthService.isAuthenticated()) {
-      const isAdmin = AuthService.isAdmin();
-      if (isAdmin) {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/dashboard');
-      }
-    }
-  }, [navigate]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     if (error) setError('');
   };
 
@@ -49,8 +39,10 @@ const UserLogin: React.FC = () => {
       if (data.user && data.token) {
         AuthService.saveAuthData(data.token, data.user);
         
+        const from = (location.state as any)?.from || '/search';
+        
         if (data.user.userType.name === 'user') {
-          navigate('/search');
+          navigate(from, { replace: true });
         }
       } else {
         setError('Invalid login response');

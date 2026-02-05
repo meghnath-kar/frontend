@@ -9,7 +9,7 @@ import { useCourseSearch } from '../hooks/useCourseSearch';
 
 const SearchCourses: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const [queryParams, setQueryParams] = useState<QueryParamsType>({ page: 1, limit: 3 });
+  const [queryParams, setQueryParams] = useState<QueryParamsType>({ page: 1, limit: 6 });
   const [filters, setFilters] = useState<any>(null);
 
   const { courseData: {
@@ -94,7 +94,6 @@ const SearchCourses: React.FC = () => {
               emptyMessage={<div className="alert alert-warning">No courses found matching your criteria. Try adjusting your filters.</div>}
             />
 
-            {/* Pagination Controls */}
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}

@@ -19,7 +19,7 @@ describe('Header Component', () => {
   test('brand logo links to home page', () => {
     renderWithRouter(<Header />);
     
-    const brandLink = screen.getByText(/📚 LMS/i).closest('a');
+    const brandLink = screen.getByText(/LMS/i).closest('a');
     expect(brandLink).toHaveAttribute('href', '/');
   });
 
@@ -53,7 +53,7 @@ describe('Header Component', () => {
     renderWithRouter(<Header />);
     
     const addCourseLink = screen.getByRole('link', { name: /add course/i });
-    expect(addCourseLink).toHaveAttribute('href', '/');
+    expect(addCourseLink).toHaveAttribute('href', '/course/add');
   });
 
   test('navbar has correct CSS classes', () => {
@@ -85,7 +85,7 @@ describe('Header Component', () => {
   test('navbar brand has correct CSS classes', () => {
     renderWithRouter(<Header />);
     
-    const brandLink = screen.getByText(/📚 LMS/i);
+    const brandLink = screen.getByText(/LMS/i);
     expect(brandLink).toHaveClass('navbar-brand');
     expect(brandLink).toHaveClass('fw-bold');
   });
@@ -106,7 +106,7 @@ describe('Header Component', () => {
     expect(navList).toBeInTheDocument();
     
     const listItems = navList?.querySelectorAll('li.nav-item');
-    expect(listItems).toHaveLength(3);
+    expect(listItems).toHaveLength(5);
   });
 
   test('all navigation links have nav-link class', () => {

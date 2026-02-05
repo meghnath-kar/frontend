@@ -4,12 +4,12 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import AuthService from '../services/AuthService';
 
-// Mock the AuthService
 jest.mock('../services/AuthService', () => ({
   __esModule: true,
   default: {
     isAuthenticated: jest.fn(),
     isAdmin: jest.fn(),
+    getUser: jest.fn(),
   },
 }));
 
@@ -20,6 +20,7 @@ describe('ProtectedRoute', () => {
 
   it('should render children when user is authenticated', () => {
     (AuthService.isAuthenticated as jest.Mock).mockReturnValue(true);
+    (AuthService.getUser as jest.Mock).mockReturnValue({ fullName: 'John Doe' });
     (AuthService.isAdmin as jest.Mock).mockReturnValue(false);
 
     render(
@@ -40,9 +41,10 @@ describe('ProtectedRoute', () => {
     expect(screen.getByText('Protected Content')).toBeInTheDocument();
   });
 
-  it('should redirect to /admin when user is not authenticated', () => {
+  it('should redirect to /login when user is not authenticated', () => {
     (AuthService.isAuthenticated as jest.Mock).mockReturnValue(false);
     (AuthService.isAdmin as jest.Mock).mockReturnValue(false);
+    (AuthService.getUser as jest.Mock).mockReturnValue(null);
 
     render(
       <MemoryRouter initialEntries={['/protected']}>
@@ -55,11 +57,10 @@ describe('ProtectedRoute', () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/admin" element={<div>Login Page</div>} />
+          <Route path="/login" element={<div>Login Page</div>} />
         </Routes>
       </MemoryRouter>
     );
-
     expect(screen.queryByText('Protected Content')).not.toBeInTheDocument();
     expect(screen.getByText('Login Page')).toBeInTheDocument();
   });
@@ -67,6 +68,7 @@ describe('ProtectedRoute', () => {
   it('should render children when user is authenticated and is admin (requireAdmin=true)', () => {
     (AuthService.isAuthenticated as jest.Mock).mockReturnValue(true);
     (AuthService.isAdmin as jest.Mock).mockReturnValue(true);
+    (AuthService.getUser as jest.Mock).mockReturnValue({ fullName: 'Admin User' });
 
     render(
       <MemoryRouter initialEntries={['/admin-protected']}>
@@ -113,6 +115,7 @@ describe('ProtectedRoute', () => {
   it('should redirect to /admin when user is not authenticated (requireAdmin=true)', () => {
     (AuthService.isAuthenticated as jest.Mock).mockReturnValue(false);
     (AuthService.isAdmin as jest.Mock).mockReturnValue(false);
+    (AuthService.getUser as jest.Mock).mockReturnValue(null);
 
     render(
       <MemoryRouter initialEntries={['/admin-protected']}>

@@ -16,11 +16,12 @@ describe('useCourseSearch', () => {
   };
 
   const mockCourse: Course = {
-    id: '1',
+    _id: '1',
     title: 'Test Course',
+    slug: 'test-course',
     description: 'Test Description',
     technology: [{ _id: 'tech1', label: 'React' }],
-    category: [{ _id: 'cat1', name: 'Frontend' }],
+    category: { _id: 'cat1', name: 'Frontend' },
     instructor: { _id: 'inst1', fullName: 'John Doe', email: 'john@example.com' },
     duration: 40,
     level: 'Intermediate',

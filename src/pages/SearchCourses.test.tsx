@@ -13,7 +13,7 @@ jest.mock('../components/CourseList', () => ({
     default: ({ courses, emptyMessage }: any) => (
         <div data-testid="courses-list">
             {courses.length === 0 ? emptyMessage : courses.map((course: Course) => (
-                <div key={course.id} data-testid={`course-${course.id}`}>
+                <div key={course._id} data-testid={`course-${course._id}`}>
                     {course.title}
                 </div>
             ))}
@@ -22,7 +22,7 @@ jest.mock('../components/CourseList', () => ({
 }));
 jest.mock('../components/SidebarFilter', () => ({
     __esModule: true,
-    default: ({ show, onClose, technologies, categories, onFiltersChange, queryParams }: any) => (
+    default: ({ show, onClose, onFiltersChange, queryParams }: any) => (
         <div data-testid="sidebar-filter" data-show={show}>
             <button onClick={onClose} data-testid="close-filters">Close</button>
             <button onClick={() => onFiltersChange({ ...queryParams, technology: ['React'] })} data-testid="apply-filters">
@@ -45,7 +45,7 @@ jest.mock('../components/SearchBox', () => ({
 }));
 jest.mock('../components/Pagination', () => ({
     __esModule: true,
-    default: ({ currentPage, totalPages, totalCount, hasNextPage, hasPrevPage, onPageChange }: any) => (
+    default: ({ currentPage, totalPages, hasNextPage, hasPrevPage, onPageChange }: any) => (
         <div data-testid="pagination">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
@@ -72,11 +72,12 @@ describe('SearchCourses Component', () => {
     const mockUseCourseSearch = useCourseSearch as jest.MockedFunction<typeof useCourseSearch>;
 
     const mockCourse: Course = {
-        id: '1',
+        _id: '1',
         title: 'React Fundamentals',
+        slug: 'react-fundamentals',
         description: 'Learn React basics',
         technology: [{ _id: 'tech1', label: 'React' }],
-        category: [{ _id: 'cat1', name: 'Frontend' }],
+        category: { _id: 'cat1', name: 'Frontend' },
         instructor: { _id: 'inst1', fullName: 'John Doe', email: 'john@example.com' },
         duration: 20,
         level: 'Beginner',
@@ -167,18 +168,15 @@ describe('SearchCourses Component', () => {
 
             render(<SearchCourses />);
 
-            // Simulate search by updating query params
             const { rerender } = render(<SearchCourses />);
             rerender(<SearchCourses />);
 
-            // We need to trigger search first, so let's check with the hook having search params
             expect(mockUseCourseSearch).toHaveBeenCalled();
         });
 
         it('should show filter button when search query exists', async () => {
             const user = userEvent.setup();
 
-            // Mock with search results
             mockUseCourseSearch.mockReturnValue({
                 courseData: {
                     ...defaultCourseData,
@@ -193,10 +191,8 @@ describe('SearchCourses Component', () => {
             const searchInput = screen.getByTestId('search-input');
             await user.type(searchInput, 'React');
 
-            // After search, the filter button should be visible
             await waitFor(() => {
                 const filterButton = screen.queryByText('All filters');
-                // Button may or may not be visible depending on queryParams.search state
                 expect(mockUseCourseSearch).toHaveBeenCalled();
             });
         });
@@ -217,14 +213,11 @@ describe('SearchCourses Component', () => {
 
             const { rerender } = render(<SearchCourses />);
 
-            // Simulate having a search query by typing
             const searchInput = screen.getByTestId('search-input');
             await user.type(searchInput, 'React');
 
-            // Force re-render to update state
             rerender(<SearchCourses />);
 
-            // Initially filters should be hidden
             let sidebar = screen.getByTestId('sidebar-filter');
             expect(sidebar).toHaveAttribute('data-show', 'false');
         });
@@ -247,7 +240,6 @@ describe('SearchCourses Component', () => {
                 expect(mockGetAllFilters).toHaveBeenCalled();
             });
 
-            // Sidebar should be rendered with filters
             expect(screen.getByTestId('sidebar-filter')).toBeInTheDocument();
         });
     });
@@ -261,11 +253,9 @@ describe('SearchCourses Component', () => {
 
             render(<SearchCourses />);
 
-            // Simulate search query
             const searchInput = screen.getByTestId('search-input');
             userEvent.type(searchInput, 'React');
 
-            // Check if loading state is handled
             expect(mockUseCourseSearch).toHaveBeenCalled();
         });
 
@@ -275,8 +265,6 @@ describe('SearchCourses Component', () => {
                 loading: true,
             });
 
-            // We need to manually trigger the search query to show loading
-            // For this test, we'll verify the hook is called correctly
             render(<SearchCourses />);
             expect(mockUseCourseSearch).toHaveBeenCalled();
         });
@@ -301,11 +289,9 @@ describe('SearchCourses Component', () => {
 
             render(<SearchCourses />);
 
-            // Perform search
             const searchInput = screen.getByTestId('search-input');
             await user.type(searchInput, 'React');
 
-            // Verify hook was called with search params
             await waitFor(() => {
                 expect(mockUseCourseSearch).toHaveBeenCalled();
             });
@@ -325,11 +311,9 @@ describe('SearchCourses Component', () => {
 
             render(<SearchCourses />);
 
-            // Apply filters
             const applyFiltersButton = screen.getByTestId('apply-filters');
             await user.click(applyFiltersButton);
 
-            // Filters should update query params
             await waitFor(() => {
                 expect(mockUseCourseSearch).toHaveBeenCalled();
             });
@@ -380,11 +364,9 @@ describe('SearchCourses Component', () => {
 
             render(<SearchCourses />);
 
-            // Search first
             const searchInput = screen.getByTestId('search-input');
             await user.type(searchInput, 'React');
 
-            // Then change page
             const nextButton = screen.getByTestId('next-page');
             await user.click(nextButton);
 
